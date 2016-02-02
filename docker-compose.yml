@@ -1,0 +1,25 @@
+
+pgapi:
+  build: ./services/postgrest
+  dockerfile: Dockerfile.interface
+  links:
+    - db
+  ports:
+    - "9999:3000"
+
+db:
+  build: ./services/postgrest
+  dockerfile: Dockerfile.db
+  environment:
+    - "POSTGRES_USER=admin"
+    - "POSTGRES_PASS=alpine"
+    - "POSTGRES_DB=projects"
+  volumes:
+    - data:/var/lib/postgresql/data
+  ports:
+    - "5432:5432"
+
+server:
+  build: ./server
+  ports:
+    - "8080:3000"

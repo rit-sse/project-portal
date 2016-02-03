@@ -37,10 +37,11 @@ const mockRequests = [
 ];
 
 const requestQuery = new XMLHttpRequest();
-requestQuery.open('GET', './purchaseList');
+requestQuery.open('GET', '/r/purchasesadfaslist');
 requestQuery.onload = function() {
     if (requestQuery.status === 200) {
         const requestString = requestQuery.responseText;
+        console.log(requestString);
         requests = JSON.parse(requestString)
         ReactDOM.render(
       		<MainPage requests={requests} />

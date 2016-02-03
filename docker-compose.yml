@@ -1,4 +1,11 @@
 
+gateway:
+  build: ./services/nginx
+  ports:
+    - "80:80"
+  volumes:
+    - "./app/dist:/usr/share/nginx/html"
+
 pgapi:
   build: ./services/postgrest
   dockerfile: Dockerfile.interface

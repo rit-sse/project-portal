@@ -65,10 +65,14 @@ select
     requests.id,
     projects.title as project,
     part,
+    link,
     unit_price as price, -- TODO: make total
-    quantity, purpose,
+    quantity,
+    purpose,
     accounts.prefered_name as requester,
-    purchase.tracking_number
+    purchase.tracking_number as tracking,
+    purchase.id::boolean as purchased,
+    requests.created as lastModified
   from requests
   join projects on requests.project=projects.id
   join accounts on requests.requester=accounts.id

@@ -1,3 +1,5 @@
 FROM postgres
 
-COPY ./init.sql /docker-entrypoint-initdb.d/init.sql
+COPY ./init.sql /docker-entrypoint-initdb.d/a.sql
+COPY ./views.sql /docker-entrypoint-initdb.d/b.sql
+COPY ./seeds.sql /docker-entrypoint-initdb.d/c.sql

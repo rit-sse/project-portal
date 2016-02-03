@@ -9,6 +9,10 @@
   "author": "",
   "license": "GPL-3.0",
   "dependencies": {
-    "express": "^4.13.4"
+    "body-parser": "^1.14.2",
+    "express": "^4.13.4",
+    "jsonschema": "^1.0.3",
+    "pg": "^4.4.4",
+    "pg-then": "^1.2.1"
   }
 }

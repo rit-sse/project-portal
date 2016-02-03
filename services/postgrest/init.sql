@@ -21,13 +21,14 @@ CREATE TABLE projects
 CREATE TABLE approval_status
 (
   id serial PRIMARY KEY,
-  approved boolean,
+  approved boolean default FALSE,
   approved_by integer REFERENCES accounts
 );
 
 CREATE TABLE purchase
 (
   id serial PRIMARY KEY,
+  approved boolean default FALSE,
   tracking_number varchar(40),
   additional_info TEXT
 );
@@ -57,26 +58,3 @@ CREATE TABLE notifications
 );
 
 COMMIT;
-
--- END DATA START VIEWS
-
-CREATE VIEW purchaselist AS
-select
-    requests.id,
-    projects.title as project,
-    part,
-    link,
-    (unit_price * quantity) as price, -- TODO: make total
-    quantity,
-    purpose,
-    accounts.prefered_name as requester,
-    purchase.tracking_number as tracking,
-    purchase.id::boolean as purchased,
-    requests.created as lastModified,
-    approval_status.approved
-  from requests
-  join projects on requests.project=projects.id
-  join accounts on requests.requester=accounts.id
-  join approval_status on requests.approval=approval_status.id
-  left join purchase on requests.purchase=purchase.id
-;

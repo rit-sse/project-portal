@@ -66,13 +66,14 @@ select
     projects.title as project,
     part,
     link,
-    unit_price as price, -- TODO: make total
+    (unit_price * quantity) as price, -- TODO: make total
     quantity,
     purpose,
     accounts.prefered_name as requester,
     purchase.tracking_number as tracking,
     purchase.id::boolean as purchased,
-    requests.created as lastModified
+    requests.created as lastModified,
+    approval_status.approved
   from requests
   join projects on requests.project=projects.id
   join accounts on requests.requester=accounts.id

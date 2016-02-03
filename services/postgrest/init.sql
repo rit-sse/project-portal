@@ -3,7 +3,7 @@
 
 BEGIN;
 
-CREATE TABLE acconts
+CREATE TABLE accounts
 (
   id serial PRIMARY KEY,
   prefered_name varchar(80),

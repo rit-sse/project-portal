@@ -22,7 +22,7 @@ CREATE TABLE approval_status
 (
   id serial PRIMARY KEY,
   approved boolean,
-  approved_by REFERENCES accounts
+  approved_by integer REFERENCES accounts
 );
 
 CREATE TABLE purchase
@@ -35,14 +35,14 @@ CREATE TABLE purchase
 CREATE TABLE requests
 (
   id serial PRIMARY KEY,
-  project REFERENCES projects,
-  requester REFERENCES accounts,
+  project integer REFERENCES projects,
+  requester integer REFERENCES accounts,
   part varchar(80),
   unit_price money,
-  quantity number,
+  quantity integer,
   link varchar(255),
   purpose TEXT,
-  approval REFERENCES approval_status,
+  approval integer REFERENCES approval_status,
   purchase int, -- Nullable referance to a purchase
   created date NOT NULL default CURRENT_DATE
 );
@@ -50,8 +50,8 @@ CREATE TABLE requests
 CREATE TABLE notifications
 (
   id serial PRIMARY KEY,
-  account REFERENCES accounts,
-  request REFERENCES requests,
+  account integer REFERENCES accounts,
+  request integer REFERENCES requests,
   ack BOOLEAN,
   created date NOT NULL default CURRENT_DATE
 );

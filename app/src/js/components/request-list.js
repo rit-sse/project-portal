@@ -10,7 +10,7 @@ import { Table, TableHeaderColumn, TableRow,
 export class RequestList extends Component {
   render() {
     const requestRows = this.props.requests.map(request => {
-      return <TableRow tooltip={request.lastModified}>
+      return <TableRow key={request.id} tooltip={request.lastModified}>
         <TableRowColumn>{request.project}</TableRowColumn>
         <TableRowColumn>{request.part}</TableRowColumn>
         <TableRowColumn>{request.quantity}</TableRowColumn>

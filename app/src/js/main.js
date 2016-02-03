@@ -13,12 +13,9 @@ const mockRequests = [
     price:'299.00',
     link:'amazon.com',
     purpose:'to project light',
-    requester:{name:'Tina Howard', email:'chh2538'},
-    approved:[{name:'Laura King', email:'lxk3301'}],
-    approvalsRequired:1,
-    purchased:[],
-    tracking:'',
-    lastModified:'02/01/2016'
+    requester:'Tina Howard',
+    approved:true,
+    purchased:false
   },
   {
     project:'Coffee Code Book',
@@ -27,12 +24,9 @@ const mockRequests = [
     price:'50.00',
     link:'amazon.com',
     purpose:'to print on',
-    requester:{name:'Jesse Jurman', email:'jrj2703@rit.edu'},
-    approved:[],
-    approvalsRequired:1,
-    purchased:[],
-    tracking:'',
-    lastModified:'12/01/2015'
+    requester:'Jesse Jurman',
+    approved:false,
+    purchased:false,
   }
 ];
 

@@ -17,14 +17,12 @@ export class RequestList extends Component {
         <TableRowColumn>{request.price}</TableRowColumn>
         <TableRowColumn>{request.link}</TableRowColumn>
         <TableRowColumn>{request.purpose}</TableRowColumn>
-        <TableRowColumn>{request.requester.name}</TableRowColumn>
+        <TableRowColumn>{request.requester}</TableRowColumn>
         <TableRowColumn>
-          <Checkbox defaultChecked={request.approved.length >= request.approvalsRequired}
-                    disabled={true} />
+          <Checkbox defaultChecked={request.approved} disabled={true} />
         </TableRowColumn>
         <TableRowColumn>
-          <Checkbox defaultChecked={request.purchased.length >= 1}
-                    disabled={true} />
+          <Checkbox defaultChecked={request.purchased} disabled={true} />
         </TableRowColumn>
       </TableRow>
     })

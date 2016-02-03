@@ -3,9 +3,10 @@ FROM haskell
 RUN apt-get update -y
 RUN apt-get install -y postgresql-9.4
 
-ADD https://github.com/begriffs/postgrest/releases/download/v0.3.0.3/postgrest-0.3.0.3-ubuntu.tar.xz /
-RUN tar -xf postgrest-0.3.0.3-ubuntu.tar.xz
+# ADD https://github.com/begriffs/postgrest/releases/download/v0.3.0.3/postgrest-0.3.0.3-ubuntu.tar.xz /
+# RUN tar -xf postgrest-0.3.0.3-ubuntu.tar.xz
 
+COPY ./postgrest /postgrest
 COPY ./entrypoint.sh /entrypoint.sh
 
 EXPOSE 3000

@@ -2,6 +2,7 @@
 pgapi:
   build: ./services/postgrest
   dockerfile: Dockerfile.interface
+  restart: always
   links:
     - db
   ports:

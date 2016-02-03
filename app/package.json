@@ -1,0 +1,37 @@
+{
+  "name": "project-portal-client",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "prebuild": "mkdirp dist/js",
+    "build": "browserify src/js/main.js -t babelify -o dist/js/main.js",
+    "postbuild": "copyfiles -f ./src/index.html dist",
+    "prestart": "npm run build",
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "browserify": {
+    "extension": [
+      "jsx"
+    ],
+    "transform": [
+      "babelify"
+    ]
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "copyfiles": "^0.2.1",
+    "material-ui": "^0.14.3",
+    "mkdirp": "^0.5.1",
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7",
+    "react-tap-event-plugin": "^0.2.2"
+  },
+  "devDependencies": {
+    "babelify": "^6.3.0",
+    "browserify": "^13.0.0",
+    "express": "^4.13.4"
+  }
+}

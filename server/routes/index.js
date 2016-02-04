@@ -14,7 +14,7 @@ router.options('/v1/request', (req, res) => {
   res.send(schemas.request);
 });
 
-router.put('/v1/request', (req, res, next) => {
+router.post('/v1/request', (req, res, next) => {
   let r = validator.validate(req.body, schemas.request);
   if (r.errors.length > 0) {
     let err = r.errors.pop();

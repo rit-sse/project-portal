@@ -13,6 +13,7 @@
     "express": "^4.13.4",
     "jsonschema": "^1.0.3",
     "pg": "^4.4.4",
-    "pg-then": "^1.2.1"
+    "pg-then": "^1.2.1",
+    "sql-template-strings": "^1.1.2"
   }
 }

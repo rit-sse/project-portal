@@ -3,6 +3,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import MainPage from './components/main-page.js';
+import AdminPage from './components/admin-page.js';
+import CreateRequest from './components/create-request-page.js';
+import { Router, Route, browserHistory } from 'react-router'
 
 let requests;
 const mockRequests = [
@@ -30,21 +33,11 @@ const mockRequests = [
   }
 ];
 
-const requestQuery = new XMLHttpRequest();
-requestQuery.open('GET', '/r/purchaselist');
-requestQuery.onload = function() {
-    if (requestQuery.status === 200) {
-        const requestString = requestQuery.responseText;
-        requests = JSON.parse(requestString)
-        ReactDOM.render(
-      		<MainPage requests={requests} />
-        , document.getElementById("main"));
-    }
-    else {
-      // request failed, render anyways
-      ReactDOM.render(
-        <MainPage requests={mockRequests} />
-      , document.getElementById("main"));
-    }
-};
-requestQuery.send();
+
+ReactDOM.render((
+  <Router history={browserHistory}>
+    <Route path="/" component={MainPage} />
+    <Route path="/admin" component={AdminPage} />
+    <Route path="/new" component={CreateRequest} />
+  </Router>
+), document.getElementById("main"));

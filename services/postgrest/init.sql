@@ -18,6 +18,19 @@ CREATE TABLE projects
   created date NOT NULL default CURRENT_DATE
 );
 
+CREATE TABLE public.account_manager_for_project
+(
+  projectid integer,
+  accountid integer,
+  id serial PRIMARY KEY,
+  CONSTRAINT account_manager_for_project_accountid_fkey FOREIGN KEY (accountid)
+      REFERENCES public.accounts (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT account_manager_for_project_projectid_fkey FOREIGN KEY (projectid)
+      REFERENCES public.projects (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+);
+
 CREATE TABLE approval_status
 (
   id serial PRIMARY KEY,

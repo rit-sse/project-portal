@@ -9,12 +9,14 @@ const pool = pg.Pool('postgres://admin:alpine@192.168.99.100/projects');
 module.exports = {
   createRequest (r) {
 
-    let approverid = 1;
-
     return pool.query(sql`
-      WITH approval AS (
-        INSERT INTO approval_status(approved_by) VALUES (${approverid}) RETURNING id
-      ) INSERT INTO public.requests(project, requester, part, unit_price, quantity, link, purpose, approval)
+      WITH
+      approvers AS (
+        SELECT approver_id as id FROM defaultapprovers WHERE project_id=${r.project} LIMIT 1
+      ),
+      approval AS (
+        INSERT INTO approval_status(approved_by) VALUES ((select id from approvers)) RETURNING id
+      ) INSERT INTO requests(project, requester, part, unit_price, quantity, link, purpose, approval)
         VALUES (${r.project}, 1, ${r.part}, ${r.unit_price}, ${r.quantity}, ${r.link}, ${r.purpose}, (select id from approval))
         RETURNING id;
     `)
@@ -23,10 +25,11 @@ module.exports = {
     })
     .catch(err => {
       if (err.message.indexOf("requests_project_fkey") > 0) {
-        let err  = new Error("Project does not exist")
+        let err  = new Error("Project does not exist");
         err.status = 412;
         throw err;
       }
+      throw err;
     });
   }
 }

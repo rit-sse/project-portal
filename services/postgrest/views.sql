@@ -24,4 +24,14 @@ select
   left join purchase on requests.purchase=purchase.id
 ;
 
+CREATE VIEW defaultapprovers AS
+select
+  	accounts.id as approver_id,
+  	projects.id as project_id
+  from account_manager_for_project
+	join accounts on
+		accounts.id=account_manager_for_project.accountid
+	join projects on
+		projects.id=account_manager_for_project.projectid
+;
 COMMIT;

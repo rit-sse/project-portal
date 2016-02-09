@@ -31,5 +31,14 @@ module.exports = {
       }
       throw err;
     });
+  },
+  getRequest(id) {
+    return pool.query(sql`select requests.part, projects.title from requests join projects on requests.project=projects.id where requests.id=${id}`)
+      .then(data => data.rows[0]);
+  },
+  approve(id) {
+    return pool.query(sql`
+      UPDATE approval_status SET approved=TRUE WHERE id=${id}
+    `);
   }
 }

@@ -32,8 +32,9 @@ const mockRequests = [
 
 const requestQuery = new XMLHttpRequest();
 requestQuery.open('GET', '/r/purchaselist');
+requestQuery.setRequestHeader('Range', '0-10');
 requestQuery.onload = function() {
-    if (requestQuery.status === 200) {
+    if (requestQuery.status >= 200 || requestQuery.status < 300) {
         const requestString = requestQuery.responseText;
         requests = JSON.parse(requestString)
         ReactDOM.render(

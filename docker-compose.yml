@@ -30,8 +30,10 @@ db:
 
 server:
   build: ./server
+  links:
+    - cache
 
-static:
-  build: ./app
-  volumes:
-    - statics:/src/dist
+cache:
+  image: redis
+  ports:
+    - "6379:6379"

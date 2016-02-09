@@ -18,7 +18,7 @@ CREATE TABLE projects
   created date NOT NULL default CURRENT_DATE
 );
 
-CREATE TABLE public.account_manager_for_project
+CREATE TABLE account_manager_for_project
 (
   projectid integer,
   accountid integer,
@@ -41,6 +41,7 @@ CREATE TABLE approval_status
 CREATE TABLE purchase
 (
   id serial PRIMARY KEY,
+  purchaser integer REFERENCES accounts,
   approved boolean default FALSE,
   tracking_number varchar(40),
   additional_info TEXT

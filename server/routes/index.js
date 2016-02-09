@@ -15,6 +15,7 @@ let router    = Router(),
 router.get('/v1/approve/:token', (req, res, next) => {
   approver.verify(req.params.token)
     .then( id => {
+      console.log(`Email approving ${id}`);
       return utils.approve(id);
     })
     .then( () => {

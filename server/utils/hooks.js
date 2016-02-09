@@ -14,8 +14,7 @@ module.exports = {
       let key = uuid.v4();
       jwt.encode(key, {identifier}, (res, token) => {
         let info = {
-          id: id,
-          secret: key
+          id, secret: key
         }
         client.set(identifier, JSON.stringify(info));
         client.expire(identifier, 86400);

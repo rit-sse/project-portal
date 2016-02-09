@@ -1,6 +1,6 @@
 module.exports = {
   mailgun: {
-    apiKey: "key-6roin4vpaszsufvylgcgo50vh7bcudy0",
+    apiKey: process.env.MAILTOKEN,
     domain: "timbrook.im"
   },
   redis: {

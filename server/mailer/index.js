@@ -19,7 +19,7 @@ module.exports = {
         let subject = `[ACTION REQUIRED] New Purchase Request: ${data.title} - ${data.part}`;
         let to = 'timbrook480@gmail.com';
 
-        approver.requestTokenForApprover(1)
+        approver.requestTokenForApprover(id)
           .then( token => {
             let options = {
               project: data.title,

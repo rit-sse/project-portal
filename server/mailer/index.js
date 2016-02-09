@@ -23,7 +23,7 @@ module.exports = {
           .then( token => {
             let options = {
               project: data.title,
-              approvelink: `http://localhost:3000/v1/approve/${token}`
+              approvelink: `http://${process.env.SERVERURL}/s/v1/approve/${token}`
             };
 
             let html = render(options);

@@ -7,9 +7,10 @@ module.exports = {
       part: {"type": "string"},
       quantity: {"type": "integer", "minimum": 1},
       unit_price: {"type": "number", "minimum": 0.01},
+      shipping: {"type": "number", "minimum": 0.01},
       link: {"type": "string"},
       purpose: {"type": "string"}
     },
-    required: ["project", "part", "quantity", "unit_price", "link", "purpose"]
+    required: ["project", "part", "quantity", "unit_price", "link", "purpose", "shipping"]
   }
 };

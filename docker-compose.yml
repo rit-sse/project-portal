@@ -4,7 +4,10 @@ gateway:
   ports:
     - "80:80"
   volumes:
-    - "./app/dist:/usr/share/nginx/html"
+    - ./app/dist:/usr/share/nginx/html:ro
+  links:
+    - pgapi
+    - server
 
 pgapi:
   build: ./services/postgrest
@@ -12,8 +15,6 @@ pgapi:
   restart: always
   links:
     - db
-  ports:
-    - "9999:3000"
 
 db:
   build: ./services/postgrest
@@ -29,5 +30,13 @@ db:
 
 server:
   build: ./server
+  environment:
+    - MAILTOKEN=''
+    - SERVERURL=192.168.99.100
+  links:
+    - cache
+
+cache:
+  image: redis
   ports:
-    - "8080:3000"
+    - "6379:6379"

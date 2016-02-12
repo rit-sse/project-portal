@@ -2,6 +2,7 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
+  "private": true,
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
@@ -11,9 +12,15 @@
   "dependencies": {
     "body-parser": "^1.14.2",
     "express": "^4.13.4",
+    "jade": "^1.11.0",
+    "json-web-token": "^1.6.3",
     "jsonschema": "^1.0.3",
+    "mailcomposer": "^3.5.0",
+    "mailgun-js": "^0.7.7",
     "pg": "^4.4.4",
     "pg-then": "^1.2.1",
-    "sql-template-strings": "^1.1.2"
+    "redis": "^2.4.2",
+    "sql-template-strings": "^1.1.2",
+    "uuid": "^2.0.1"
   }
 }

@@ -18,9 +18,6 @@ app.use((req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
-  if (err.stack) {
-    console.error(err.stack);
-  }
   const status = err.status;
   res.status(status || 500).send({ error: err.message });
 });

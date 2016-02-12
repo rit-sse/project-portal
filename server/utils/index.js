@@ -9,15 +9,17 @@ const pool = pg.Pool('postgres://admin:alpine@192.168.99.100/projects');
 module.exports = {
   createRequest (r) {
 
+    let activeUserId = 1;
+
     return pool.query(sql`
       WITH
-      approvers AS (
-        SELECT approver_id as id FROM defaultapprovers WHERE project_id=${r.project} LIMIT 1
-      ),
-      approval AS (
-        INSERT INTO approval_status(approved_by) VALUES ((select id from approvers)) RETURNING id
-      ) INSERT INTO requests(project, requester, part, unit_price, quantity, link, purpose, approval)
-        VALUES (${r.project}, 1, ${r.part}, ${r.unit_price}, ${r.quantity}, ${r.link}, ${r.purpose}, (select id from approval))
+      purchase AS (
+        INSERT INTO purchase(part, unit_price, shipping, quantity, link, purpose)
+          VALUES (${r.part}, ${r.unit_price}, ${r.shipping}, ${r.quantity}, ${r.link}, ${r.purpose})
+          RETURNING id
+        )
+      INSERT INTO requests(project, purchase, requester)
+        VALUES (${r.project}, (SELECT id FROM purchase), ${activeUserId})
         RETURNING id;
     `)
     .then(data => {
@@ -33,12 +35,17 @@ module.exports = {
     });
   },
   getRequest(id) {
-    return pool.query(sql`select requests.part, projects.title from requests join projects on requests.project=projects.id where requests.id=${id}`)
+    return pool.query(sql`
+      select purchase.part, projects.name
+      from requests
+      join projects on requests.project=projects.id
+      join purchase on requests.purchase=purchase.id
+      where requests.id=${id}`)
       .then(data => data.rows[0]);
   },
   approve(id) {
     return pool.query(sql`
-      UPDATE approval_status SET approved=TRUE WHERE id=${id}
+      UPDATE requests SET approved=TRUE WHERE id=${id}
     `);
   }
 }

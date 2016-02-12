@@ -28,6 +28,18 @@ router.options('/v1/request', (req, res) => {
   res.send(schemas.request);
 });
 
+
+/**
+ {
+   "project": 1,
+   "part": "A new part",
+   "quantity": 1,
+   "unit_price": 0.50,
+   "shipping": 1.23,
+   "link": "https://google.com",
+   "purpose": "The Internet"
+ }
+ */
 router.post('/v1/request', (req, res, next) => {
   let r = validator.validate(req.body, schemas.request);
   if (r.errors.length > 0) {

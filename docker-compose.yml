@@ -4,7 +4,7 @@ gateway:
   ports:
     - "80:80"
   volumes:
-    - ./app/dist:/usr/share/nginx/html
+    - ./app/dist:/usr/share/nginx/html:ro
   links:
     - pgapi
     - server
@@ -30,6 +30,9 @@ db:
 
 server:
   build: ./server
+  environment:
+    - MAILTOKEN=''
+    - SERVERURL=192.168.99.100
   links:
     - cache
 

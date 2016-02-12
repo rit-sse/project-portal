@@ -37,6 +37,9 @@ module.exports = {
                 to, message: message.toString('ascii')
               };
               mailer.messages().sendMime(dataToSend, function (sendError, body) {
+                if (sendError) {
+                  console.error(sendError);
+                }
                 console.log(body);
               });
             });

@@ -7,32 +7,13 @@ import AdminPage from './components/admin-page.js';
 import CreateRequest from './components/create-request-page.js';
 import { Router, Route, browserHistory } from 'react-router'
 
-let requests;
-const mockRequests = [
-  {
-    project:'Holo Deck',
-    part:'cube projector',
-    quantity:1,
-    price:'299.00',
-    link:'amazon.com',
-    purpose:'to project light',
-    requester:'Tina Howard',
-    approved:true,
-    purchased:false
-  },
-  {
-    project:'Coffee Code Book',
-    part:'paper',
-    quantity:100,
-    price:'50.00',
-    link:'amazon.com',
-    purpose:'to print on',
-    requester:'Jesse Jurman',
-    approved:false,
-    purchased:false,
-  }
-];
+import injectTapEventPlugin from 'react-tap-event-plugin';
 
+// Needed for onTouchTap
+// Can go away when react 1.0 release
+// Check this repo:
+// https://github.com/zilverline/react-tap-event-plugin
+injectTapEventPlugin();
 
 ReactDOM.render((
   <Router history={browserHistory}>

@@ -2,12 +2,16 @@
 // created by Jesse Jurman
 
 import React, { Component } from 'react';
+
 import {
   AppBar,
-  Toolbar,
-  ToolbarGroup,
-  RaisedButton
+  IconMenu,
+  IconButton,
+  MenuItem
 } from 'material-ui';
+import MoreVertIcon from 'material-ui/lib/svg-icons/navigation/more-vert';
+import mockRequests from './mock-requests';
+
 import { Link } from 'react-router';
 import RequestList from './request-list';
 
@@ -17,7 +21,7 @@ export class MainPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      requests: []
+      requests: mockRequests
     }
   }
 
@@ -35,21 +39,20 @@ export class MainPage extends Component {
   }
 
   render() {
-    return <div>
+    const iconMenu = (<IconMenu
+      iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
+      targetOrigin={{horizontal: 'right', vertical: 'top'}}
+      anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+    >
+      <MenuItem primaryText="Log In" />
+      <MenuItem primaryText="Create Request" />
+    </IconMenu> );
+    return (<div>
       <AppBar title="Project Portal"
               iconElementLeft={<span/>}
-              iconElementRight={
-                <Toolbar>
-                  <ToolbarGroup float="right">
-                    <RaisedButton
-                      containerElement={<Link to="/new" />}
-                      linkButton={true}
-                      label="New Request" />
-                  </ToolbarGroup>
-                </Toolbar>
-              } />
+              iconElementRight={iconMenu} />
       <RequestList requests={this.state.requests} />
-    </div>
+    </div>);
   }
 }
 

@@ -7,6 +7,7 @@
     "prebuild": "mkdirp dist/js",
     "build": "browserify src/js/main.js -t babelify -o dist/js/main.js",
     "postbuild": "copyfiles -f ./src/index.html dist",
+    "dev": "onchange \"src/client/**/*\" -- npm run build:client",
     "prestart": "npm run build",
     "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"

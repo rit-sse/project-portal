@@ -14,6 +14,7 @@ import mockRequests from './mock-requests';
 
 import { Link } from 'react-router';
 import RequestList from './request-list';
+import MainDropdownMenu from './dropdown-menu';
 
 // The main page for the application
 export class MainPage extends Component {
@@ -50,7 +51,7 @@ export class MainPage extends Component {
     return (<div>
       <AppBar title="Project Portal"
               iconElementLeft={<span/>}
-              iconElementRight={iconMenu} />
+              iconElementRight={<MainDropdownMenu />} />
       <RequestList requests={this.state.requests} />
     </div>);
   }

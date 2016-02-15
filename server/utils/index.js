@@ -34,6 +34,15 @@ module.exports = {
       throw err;
     });
   },
+  getApproversForId(id) {
+    return pool.query(sql`
+      select accounts.email from accounts
+      	join projects on projects.approver=accounts.id
+      	join requests on requests.project=projects.id
+      	where requests.id=${id};
+      `)
+      .then( data => data.rows);
+  },
   getRequest(id) {
     return pool.query(sql`
       select purchase.part, projects.name

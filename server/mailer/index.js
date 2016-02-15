@@ -13,16 +13,26 @@ const render = jade.compileFile('./mailer/templates/default.jade');
 module.exports = {
   scheduleEmail(id) {
     console.log(`Sending email for request ${id}`)
-    dataUtils.getRequest(id)
-      .then( data => {
 
-        let subject = `[ACTION REQUIRED] New Purchase Request: ${data.title} - ${data.part}`;
-        let to = 'timbrook480@gmail.com';
+    Promise.all([
+      dataUtils.getRequest(id),
+      dataUtils.getApproversForId(id)
+    ])
+    .then( res => {
+      return {
+        request: res[0],
+        approvers: res[1].map( e => e.email )
+      }
+    })
+    .then( res => {
+
+        let subject = `[ACTION REQUIRED] New Purchase Request: ${res.request.name} - ${res.request.part}`;
+        let to = res.approvers.pop();
 
         approver.requestTokenForApprover(id)
           .then( token => {
             let options = {
-              project: data.title,
+              project: res.request.name,
               approvelink: `http://${process.env.SERVERURL}/s/v1/approve/${token}`
             };
 

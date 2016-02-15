@@ -7,7 +7,7 @@ gateway:
     - ./app/dist:/usr/share/nginx/html:ro
   links:
     - pgapi
-    - server
+    - server:node
 
 pgapi:
   build: ./services/postgrest

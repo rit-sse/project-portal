@@ -3,49 +3,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import MainPage from './components/main-page.js';
+import AdminPage from './components/admin-page.js';
+import CreateRequest from './components/create-request-page.js';
+import { Router, Route, browserHistory } from 'react-router'
 
-let requests;
-const mockRequests = [
-  {
-    project:'Holo Deck',
-    part:'cube projector',
-    quantity:1,
-    price:'299.00',
-    link:'amazon.com',
-    purpose:'to project light',
-    requester:'Tina Howard',
-    approved:true,
-    purchased:false
-  },
-  {
-    project:'Coffee Code Book',
-    part:'paper',
-    quantity:100,
-    price:'50.00',
-    link:'amazon.com',
-    purpose:'to print on',
-    requester:'Jesse Jurman',
-    approved:false,
-    purchased:false,
-  }
-];
+import injectTapEventPlugin from 'react-tap-event-plugin';
 
-const requestQuery = new XMLHttpRequest();
-requestQuery.open('GET', '/r/purchaselist');
-requestQuery.setRequestHeader('Range', '0-10');
-requestQuery.onload = function() {
-    if (requestQuery.status >= 200 || requestQuery.status < 300) {
-        const requestString = requestQuery.responseText;
-        requests = JSON.parse(requestString)
-        ReactDOM.render(
-      		<MainPage requests={requests} />
-        , document.getElementById("main"));
-    }
-    else {
-      // request failed, render anyways
-      ReactDOM.render(
-        <MainPage requests={mockRequests} />
-      , document.getElementById("main"));
-    }
-};
-requestQuery.send();
+// Needed for onTouchTap
+// Can go away when react 1.0 release
+// Check this repo:
+// https://github.com/zilverline/react-tap-event-plugin
+injectTapEventPlugin();
+
+ReactDOM.render((
+  <Router history={browserHistory}>
+    <Route path="/" component={MainPage} />
+    <Route path="/admin" component={AdminPage} />
+    <Route path="/new" component={CreateRequest} />
+  </Router>
+), document.getElementById("main"));

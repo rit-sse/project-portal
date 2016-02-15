@@ -7,6 +7,7 @@
     "prebuild": "mkdirp dist/js",
     "build": "browserify src/js/main.js -t babelify -o dist/js/main.js",
     "postbuild": "copyfiles -f ./src/index.html dist",
+    "dev": "onchange \"src/client/**/*\" -- npm run build:client",
     "prestart": "npm run build",
     "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -23,10 +24,12 @@
   "license": "ISC",
   "dependencies": {
     "copyfiles": "^0.2.1",
+    "history": "^1.17.0",
     "material-ui": "^0.14.3",
     "mkdirp": "^0.5.1",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
+    "react-router": "^1.0.3",
     "react-tap-event-plugin": "^0.2.2"
   },
   "devDependencies": {

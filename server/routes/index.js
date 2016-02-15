@@ -19,7 +19,7 @@ router.get('/v1/approve/:token', (req, res, next) => {
       return utils.approve(id);
     })
     .then( () => {
-      res.send({ status: 'ok' });
+      res.send("Approved! You can now close this tab");
     })
     .catch(next);
 });
@@ -27,7 +27,6 @@ router.get('/v1/approve/:token', (req, res, next) => {
 router.options('/v1/request', (req, res) => {
   res.send(schemas.request);
 });
-
 
 /**
  {

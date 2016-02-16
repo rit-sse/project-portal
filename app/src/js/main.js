@@ -6,7 +6,8 @@ import MainPage from './components/main-page.js';
 import AdminPage from './components/admin-page.js';
 import CreateRequest from './components/create-request-page.js';
 import { Router, Route, browserHistory } from 'react-router'
-
+import { Provider } from 'react-redux';
+import store from './store';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
 // Needed for onTouchTap
@@ -16,9 +17,11 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
 ReactDOM.render((
-  <Router history={browserHistory}>
-    <Route path="/" component={MainPage} />
-    <Route path="/admin" component={AdminPage} />
-    <Route path="/new" component={CreateRequest} />
-  </Router>
+  <Provider store={store}>
+    <Router history={browserHistory}>
+      <Route path="/" component={MainPage} />
+      <Route path="/admin" component={AdminPage} />
+      <Route path="/new" component={CreateRequest} />
+    </Router>
+  </Provider>
 ), document.getElementById("main"));

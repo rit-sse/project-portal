@@ -1,3 +1,4 @@
+'use strict';
 // main-page.js
 // created by Jesse Jurman
 
